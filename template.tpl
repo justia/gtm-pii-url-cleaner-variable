@@ -17,6 +17,9 @@ ___INFO___
   "description": "Cleans PII from a URL by redacting query parameters by key or value. Supports regular expressions. Ensure you clean up URLs to remove any PII before sending  to analytics or third-party platform.",
   "containerContexts": [
     "WEB"
+  ],
+  "categories": [
+    "UTILITY"
   ]
 }
 
