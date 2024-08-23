@@ -280,7 +280,7 @@ scenarios:
 - name: Test without query parameters
   code: |-
     const mockData = {
-      url: 'https://www.test.com/thank-you-info/',
+      url: 'https://www.test.com/mypath/',
       paramKeys: '\\d+',
       decodeUri: false
     };
@@ -289,11 +289,11 @@ scenarios:
     let variableResult = runCode(mockData);
 
     // Verify that the variable returns a result.
-    assertThat(variableResult).isEqualTo('https://www.test.com/thank-you-info/');
+    assertThat(variableResult).isEqualTo('https://www.test.com/mypath/');
 - name: Test with empty params
   code: |-
     const mockData = {
-      url: 'https://www.test.com/thank-you-info/?Foo=bar+foo&5_From_Page=https://www.site.com/&10_Name=&20_Email=support@justia.com&30_Phone=1234567890&40_Message=this%20is%20a%20test%20message,%20please%20ignore',
+      url: 'https://www.test.com/mypath/?Foo=bar+foo&10_Name=&20_Email=support@test.com&30_Phone=1234567890&40_Message=this%20is%20a%20test%20message,%20please%20ignore',
       paramKeys: '\\d+',
       decodeUri: false
     };
@@ -302,11 +302,11 @@ scenarios:
     let variableResult = runCode(mockData);
 
     // Verify that the variable returns a result.
-    assertThat(variableResult).isEqualTo('https://www.test.com/thank-you-info/?Foo=bar%20foo&5_From_Page=[redacted]&10_Name=&20_Email=[redacted]&30_Phone=[redacted]&40_Message=[redacted]');
+    assertThat(variableResult).isEqualTo('https://www.test.com/mypath/?Foo=bar%20foo&10_Name=&20_Email=[redacted]&30_Phone=[redacted]&40_Message=[redacted]');
 - name: Test splitting by |
   code: |-
     const mockData = {
-      url: 'https://www.test.com/thank-you-info/?foo=bar+foo&10_Name=&20_Email=support@justia.com&30_Phone=1234567890&40_Message=this%20is%20a%20test%20message,%20please%20ignore&utm_content=content&utm_source=newsletter&utm_medium=email',
+      url: 'https://www.test.com/mypath/?foo=bar+foo&10_Name=&20_Email=support@test.com&30_Phone=1234567890&40_Message=this%20is%20a%20test%20message,%20please%20ignore&utm_content=content&utm_source=newsletter&utm_medium=email',
       paramKeys: 'foo|utm_|\\d+',
       decodeUri: false
     };
@@ -315,7 +315,7 @@ scenarios:
     let variableResult = runCode(mockData);
 
     // Verify that the variable returns a result.
-    assertThat(variableResult).isEqualTo('https://www.test.com/thank-you-info/?foo=[redacted]&10_Name=&20_Email=[redacted]&30_Phone=[redacted]&40_Message=[redacted]&utm_content=[redacted]&utm_source=[redacted]&utm_medium=[redacted]');
+    assertThat(variableResult).isEqualTo('https://www.test.com/mypath/?foo=[redacted]&10_Name=&20_Email=[redacted]&30_Phone=[redacted]&40_Message=[redacted]&utm_content=[redacted]&utm_source=[redacted]&utm_medium=[redacted]');
 - name: Test key full match
   code: |-
     const mockData = {
@@ -334,6 +334,6 @@ scenarios:
 
 ___NOTES___
 
-Created on 8/23/2024, 2:05:59 AM
+Created on 8/23/2024, 2:26:52 AM
 
 
