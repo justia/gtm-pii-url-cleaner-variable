@@ -1,5 +1,12 @@
 
 
+## [2024.0.2](https://github.com/justia/gtm-pii-url-cleaner-variable/compare/2024.0.1...2024.0.2) (2024-08-23)
+
+
+### Bug Fixes
+
+* unit tests ([5191ee5](https://github.com/justia/gtm-pii-url-cleaner-variable/commit/5191ee559766a50faedccbf99d92459097335ca9))
+
 ## [2024.0.1](https://github.com/justia/gtm-pii-url-cleaner-variable/compare/2024.0.0...2024.0.1) (2024-08-22)
 
 
