@@ -14,13 +14,13 @@ ___INFO___
   "version": 1,
   "securityGroups": [],
   "displayName": "PII - URL Cleaner",
-  "description": "Cleans PII from a URL by redacting query parameters by key or value. Supports regular expressions. Ensure you clean up URLs to remove any PII before sending  to analytics or third-party platform.",
+  "description": "Removes PII from URLs by redacting query parameters based on key or value, with support for regular expressions. Make sure to clean URLs to remove any PII before sending them to analytics or third-par",
   "containerContexts": [
     "WEB"
   ],
   "categories": [
     "UTILITY"
-  ]
+  ]  
 }
 
 
@@ -47,7 +47,14 @@ ___TEMPLATE_PARAMETERS___
     "displayName": "Query Parameter Keys",
     "simpleValueType": true,
     "defaultValue": "name|email|token",
-    "help": "List of query parameter keys to replace separated by \"|\". Note that each value will be treated as a regular expression. So if you input utm_ it will redact any query parameter keys that start with utm_."
+    "help": "List the query parameter keys to replace, separated by \u0027|\u0027. Each key will be treated as a regular expression. For example, entering \u003ccode\u003eutm_\u003c/code\u003e will redact any query parameter keys starting with \u003ccode\u003eutm_\u003c/code\u003e. To use exact matches instead of regular expressions, check the \u003ccode\u003eparamKeysFullMatch\u003c/code\u003e checkbox below."
+  },
+  {
+    "type": "CHECKBOX",
+    "name": "paramKeysFullMatch",
+    "checkboxText": "Keys Full Match",
+    "simpleValueType": true,
+    "help": "By default, the keys are treated as regular expressions. For example, \u003ccode\u003eutm_\u003c/code\u003e will match all parameter keys starting with \u003ccode\u003eutm_\u003c/code\u003e, such as \u003ccode\u003eutm_source\u003c/code\u003e and \u003ccode\u003eutm_medium\u003c/code\u003e. Check this box to disable regular expression matching and use exact key matching instead."
   },
   {
     "type": "PARAM_TABLE",
@@ -77,14 +84,7 @@ ___TEMPLATE_PARAMETERS___
     ],
     "newRowButtonText": "New Pattern",
     "alwaysInSummary": false,
-    "help": "For query parameter values where the key is dynamic or the key is unknown, it can be redacted if the value matches a regular expression."
-  },
-  {
-    "type": "CHECKBOX",
-    "name": "paramKeysFullMatch",
-    "checkboxText": "Keys Full Match",
-    "simpleValueType": true,
-    "help": "By default, the keys will be treated as regular expressions. Like \u003ccode\u003eutm_\u003c/code\u003e will match all the parameter keys that start with \u003ccode\u003eutm_\u003c/code\u003e such as \u003ccode\u003eutm_source\u003c/code\u003e and \u003ccode\u003eutm_medium\u003c/code\u003e. Enable this checkbox to disable this behavior."
+    "help": "Query parameter values with dynamic or unknown keys can be redacted if the value matches a specified regular expression."
   }
 ]
 
@@ -334,6 +334,6 @@ scenarios:
 
 ___NOTES___
 
-Created on 8/22/2024, 1:52:51 PM
+Created on 8/23/2024, 2:05:59 AM
 
 
