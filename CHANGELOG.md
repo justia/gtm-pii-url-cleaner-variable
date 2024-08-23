@@ -1,5 +1,12 @@
 
 
+## [2024.0.1](https://github.com/justia/gtm-pii-url-cleaner-variable/compare/2024.0.0...2024.0.1) (2024-08-22)
+
+
+### Bug Fixes
+
+* metadata file name ([88868bf](https://github.com/justia/gtm-pii-url-cleaner-variable/commit/88868bfa5128033a9629a484e7b07040c93d98ee))
+
 # 2024.0.0 (2024-08-22)
 
 
