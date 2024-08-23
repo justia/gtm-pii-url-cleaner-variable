@@ -29,10 +29,27 @@ By default, the keys are treated as regular expressions. For example, `phone_` w
 `https://example.com/?first_name=my first name&last_name=my last name&cellphone=123-456-7890&mainphone=000-000-000&10_Hash=My_Hash&foo=bar`    
 **Replacement:** `[redacted]`  
 **Query Parameter Keys:** `name|phone|\d+`  
+**Full Match Keys**: Unchecked
 
 Redacted URL:  
 `https://example.com/?first_name=[redacted]&last_name=[redacted]&cellphone=[redacted]&mainphone=[redacted]&10_Hash=[redacted]&foo=bar`
 
+Note that `foo` was not matched; therefore, the original value was retained.
+
+### Example 2
+**URL:**  
+`https://example.com/?first_name=my first name&cellphone=123-456-7890&foo=bar`    
+**Replacement:** `[redacted]`  
+**Query Parameter Keys:** `first_name|phone`  
+**Full Match Keys**: Checked
+
+Redacted URL:  
+`https://www.jmbm.com/?first_name=[redacted]&cellphone=123-456-7890&&foo=bar`
+
+Note that `phone` was not matched since the key is `cellphone`; therefore, the original value was retained.
+
+## Tips
+Make sure to default the `false` value to the initial input, in case any error happens during the replacement of the URL.
 
 ## Contributing
 See our [contributing guidelines](CONTRIBUTING.md).
