@@ -44,7 +44,7 @@ Note that `foo` was not matched; therefore, the original value was retained.
 **Full Match Keys**: Checked
 
 Redacted URL:  
-`https://www.jmbm.com/?first_name=[redacted]&cellphone=123-456-7890&&foo=bar`
+`https://example.com/?first_name=[redacted]&cellphone=123-456-7890&&foo=bar`
 
 Note that `phone` was not matched since the key is `cellphone`; therefore, the original value was retained.
 
