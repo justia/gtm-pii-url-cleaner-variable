@@ -1,5 +1,9 @@
 # Google Tag Manager 'PII - URL Cleaner' Variable Template
 
+[![Template Status](https://img.shields.io/badge/Community%20Template%20Gallery%20Status-published-green)](https://tagmanager.google.com/gallery/#/owners/justia/templates/gtm-pii-url-cleaner-variable) ![Repo Size](https://img.shields.io/github/repo-size/justia/gtm-pii-url-cleaner-variable) ![License](https://img.shields.io/github/license/justia/gtm-pii-url-cleaner-variable)
+
+---
+
 ## Summary
 
 This repository contains a [Google Tag Manager Variable template](https://developers.google.com/tag-manager/templates) that makes it possible to clean up URLs to remove any personally identifiable information (PII) before sending them to analytics or third-party platforms.
@@ -44,7 +48,7 @@ Note that `foo` was not matched; therefore, the original value was retained.
 **Full Match Keys**: Checked
 
 Redacted URL:  
-`https://www.jmbm.com/?first_name=[redacted]&cellphone=123-456-7890&&foo=bar`
+`https://example.com/?first_name=[redacted]&cellphone=123-456-7890&&foo=bar`
 
 Note that `phone` was not matched since the key is `cellphone`; therefore, the original value was retained.
 

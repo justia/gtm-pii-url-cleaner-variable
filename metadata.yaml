@@ -16,7 +16,5 @@ homepage: "https://company.justia.com/"
 documentation: "https://github.com/justia/gtm-pii-url-cleaner-variable"
 versions:
   # Latest version
-  - sha: f0798f48c8ee049985690501a1d84764cce2af5e
-    changeNotes: Update Documentation  
-  - sha: 40202c4e83c3adbb0a3ad3288bfae767c756e19e
+  - sha: 5191ee559766a50faedccbf99d92459097335ca9
     changeNotes: Initial Version
