@@ -1,5 +1,12 @@
 
 
+# [2024.1.0](https://github.com/justia/gtm-pii-url-cleaner-variable/compare/2024.0.2...2024.1.0) (2024-10-10)
+
+
+### Features
+
+* add support to delete parameters ([d863471](https://github.com/justia/gtm-pii-url-cleaner-variable/commit/d863471183efdaf06166d1e2d8f12c58f67435c8))
+
 ## [2024.0.2](https://github.com/justia/gtm-pii-url-cleaner-variable/compare/2024.0.1...2024.0.2) (2024-08-23)
 
 
