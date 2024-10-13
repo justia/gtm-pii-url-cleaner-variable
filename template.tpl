@@ -20,7 +20,7 @@ ___INFO___
   ],
   "categories": [
     "UTILITY"
-  ]  
+  ]
 }
 
 
@@ -37,15 +37,15 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "PARAM_TABLE",
     "name": "paramKeys",
-    "displayName": "Query Parameters Keys",
+    "displayName": "Query Parameter Keys",
     "paramTableColumns": [
       {
         "param": {
           "type": "TEXT",
-          "name": "regex",
-          "displayName": "Regex",
+          "name": "keyContents",
+          "displayName": "Parameter key",
           "simpleValueType": true,
-          "help": "Examples: \u003csmall\u003e\u003cbr\u003eEmail: \u003cem\u003e[aA-zZ0-9._]+(@|%40)[aA-zZ0-9.-]+.[aA-zZ]\u003c/em\u003e\u003cbr\u003ePhone: \u003cem\u003e(\\+\\d+\\s)?\\(?\\d+\\)?[\\s.-]\\d+[\\s.-]\\d+\u003c/em\u003e\u003c/small\u003e",
+          "help": "The parameter key or name",
           "valueValidators": [
             {
               "type": "NON_EMPTY"
@@ -57,8 +57,36 @@ ___TEMPLATE_PARAMETERS___
       {
         "param": {
           "type": "SELECT",
-          "name": "redactOrDelete",
-          "displayName": "Redact or delete",
+          "name": "matchCondition",
+          "displayName": "Matching Condition",
+          "macrosInSelect": false,
+          "selectItems": [
+            {
+              "value": "equals",
+              "displayValue": "equals"
+            },
+            {
+              "value": "equalsIgnore",
+              "displayValue": "equals (ignore case)"
+            },
+            {
+              "value": "matchesRegEx",
+              "displayValue": "matches RegEx"
+            },
+            {
+              "value": "matchesRegExIgnore",
+              "displayValue": "matches RegEx (ignore case)"
+            }
+          ],
+          "simpleValueType": true
+        },
+        "isUnique": false
+      },
+      {
+        "param": {
+          "type": "SELECT",
+          "name": "replacementType",
+          "displayName": "Replacement Type",
           "macrosInSelect": false,
           "selectItems": [
             {
@@ -70,8 +98,7 @@ ___TEMPLATE_PARAMETERS___
               "displayValue": "Delete"
             }
           ],
-          "simpleValueType": true,
-          "help": "Redact the value to the desired text, or delete the parameter and value completely."
+          "simpleValueType": true
         },
         "isUnique": false
       },
@@ -79,44 +106,34 @@ ___TEMPLATE_PARAMETERS___
         "param": {
           "type": "TEXT",
           "name": "replacement",
-          "displayName": "Redact Replacement",
+          "displayName": "Replacement",
           "simpleValueType": true,
           "defaultValue": "[redacted]",
           "enablingConditions": [
             {
-              "paramName": "redactOrDelete",
+              "paramName": "replacementType",
               "paramValue": "Redact",
               "type": "EQUALS"
             }
           ]
         },
         "isUnique": false
-      },
-      {
-        "param": {
-          "type": "CHECKBOX",
-          "name": "fullMatch",
-          "checkboxText": "Full match",
-          "simpleValueType": true,
-          "help": "By default, the keys are treated as regular expressions. For example, \u003ccode\u003eutm_\u003c/code\u003e will match all parameter keys starting with \u003ccode\u003eutm_\u003c/code\u003e, such as \u003ccode\u003eutm_source\u003c/code\u003e and \u003ccode\u003eutm_medium\u003c/code\u003e. Check this box to disable regular expression matching and use exact key matching instead."
-        },
-        "isUnique": false
       }
     ],
-    "newRowButtonText": "New Pattern",
+    "newRowButtonText": "New Parameter Key",
     "alwaysInSummary": false,
-    "help": "List the query parameter keys to redact/delete. Each key will be treated as a regular expression. For example, entering \u003ccode\u003eutm_\u003c/code\u003e will redact any query parameter keys starting with \u003ccode\u003eutm_\u003c/code\u003e. To use exact matches instead of regular expressions, check the \u003ccode\u003eparamKeysFullMatch\u003c/code\u003e checkbox below."
+    "help": "List the query parameter keys to redact/delete. You can use different matching condition options."
   },
   {
     "type": "PARAM_TABLE",
     "name": "paramValues",
-    "displayName": "Query Parameters Values",
+    "displayName": "Query Parameter Values",
     "paramTableColumns": [
       {
         "param": {
           "type": "TEXT",
           "name": "regex",
-          "displayName": "Regex",
+          "displayName": "Parameter value regex",
           "simpleValueType": true,
           "help": "Examples: \u003csmall\u003e\u003cbr\u003eEmail: \u003cem\u003e[aA-zZ0-9._]+(@|%40)[aA-zZ0-9.-]+.[aA-zZ]\u003c/em\u003e\u003cbr\u003ePhone: \u003cem\u003e(\\+\\d+\\s)?\\(?\\d+\\)?[\\s.-]\\d+[\\s.-]\\d+\u003c/em\u003e\u003c/small\u003e"
         },
@@ -125,8 +142,8 @@ ___TEMPLATE_PARAMETERS___
       {
         "param": {
           "type": "SELECT",
-          "name": "redactOrDelete",
-          "displayName": "Redact or delete",
+          "name": "replacementType",
+          "displayName": "Replacement Type",
           "macrosInSelect": false,
           "selectItems": [
             {
@@ -135,11 +152,10 @@ ___TEMPLATE_PARAMETERS___
             },
             {
               "value": "Delete",
-              "displayValue": "delete"
+              "displayValue": "Delete"
             }
           ],
-          "simpleValueType": true,
-          "help": "Redact the value to the desired text, or delete the parameter and value completely."
+          "simpleValueType": true
         },
         "isUnique": false
       },
@@ -147,12 +163,12 @@ ___TEMPLATE_PARAMETERS___
         "param": {
           "type": "TEXT",
           "name": "replacement",
-          "displayName": "Redact Replacement",
+          "displayName": "Replacement Text",
           "simpleValueType": true,
           "defaultValue": "[redacted]",
           "enablingConditions": [
             {
-              "paramName": "redactOrDelete",
+              "paramName": "replacementType",
               "paramValue": "Redact",
               "type": "EQUALS"
             }
@@ -161,7 +177,7 @@ ___TEMPLATE_PARAMETERS___
         "isUnique": false
       }
     ],
-    "newRowButtonText": "New Pattern",
+    "newRowButtonText": "New Parameter Value",
     "alwaysInSummary": false,
     "help": "Query parameter values with dynamic or unknown keys can be redacted if the value matches a specified regular expression."
   }
@@ -191,12 +207,11 @@ const config = {
 };
 
 // functions
-
 const doReplacements = function(text, row) {
   const match = text.match(row.regex);
   let textReplacement = row.replacement || '[redacted]';
   
-  if (row.redactOrDelete && row.redactOrDelete == 'Delete') {
+  if (row.replacementType && row.replacementType == 'Delete') {
     textReplacement = '[delete]';
   }
 
@@ -213,11 +228,20 @@ const doReplacements = function(text, row) {
 
 const shouldRedact = function(key, row) {
   // we find if any of the query patterns match
-  if (row.fullMatch) {
-     return row.regex == key; 
+  if (row.matchCondition == "equals") {
+     return row.keyContents === key; 
+  }
+
+  if (row.matchCondition == "equalsIgnore") {
+     return row.keyContents.toLowerCase() === key.toLowerCase(); 
   }
   
-  return key.match(row.regex);
+  if (row.matchCondition == "matchesRegEx") {
+     return key.match(row.keyContents); 
+  }  
+  
+  // regex ignore case
+  return key.toLowerCase().match(row.keyContents.toLowerCase());
 };
 
 // logic
@@ -238,8 +262,9 @@ const newParams = Object.entries(urlObject.searchParams).map((entry) => {
   
   for (let i = 0; i < config.paramKeys.length; i++) {
     let row = config.paramKeys[i];
+    
     if (shouldRedact(entry[0], row)) {
-      if (row.redactOrDelete && row.redactOrDelete == "Delete") {
+      if (row.replacementType && row.replacementType == "Delete") {
         return null;
       }
       
@@ -283,7 +308,7 @@ scenarios:
       url: 'https://mydomain.com/?foo=bar&other_param=Keep&1_Param1=My%20Value%20Here&20_Name=John&30_Phone=123456890&30_Email=test%40domain.com&40_Message=this%20is%20just%20a%20test%20msg',
       paramKeys: [
         {
-          regex: '\\d+',
+          keyContents: '\\d+',
           replacement: '[redacted]'
         }
       ],
@@ -301,7 +326,7 @@ scenarios:
       url: 'https://mydomain.com/?foo=bar&other=Keep&1_Value=My%20Values%20Here&10_Name=Maria&20_Phone=123456890&30_Email=test%40domain.com&40_Message=this%20is%20just%20a%20test%20msg',
       paramKeys: [
         {
-          regex: '\\d+_',
+          keyContents: '\\d+_',
           replacement: '[redacted]'
         }
       ],
@@ -319,7 +344,7 @@ scenarios:
       url: 'https://mydomain.com/?foo=bar&1_Param=My%252520Test%252520Message&10_Name=test&20_Phone=123456890&30_Email=test%40domain.com&40_Message=this%2520is%2520just%2520a%2520test%2520msg',
       paramKeys: [
         {
-          regex: '\\d+_',
+          keyContents: '\\d+_',
           replacement: '[redacted]'
         }
       ],
@@ -375,7 +400,7 @@ scenarios:
       url: 'https://www.test.com/subpath?success=1&10_Name=my%20name&20_Email=support@test.com&30_Phone=1234567890&40_Message=this%20is%20a%20test%20message,%20please%20ignore',
       paramKeys: [
         {
-          regex: '\\d+_',
+          keyContents: '\\d+_',
           replacement: '[redacted]'
         }
       ],
@@ -393,7 +418,7 @@ scenarios:
       url: 'https://www.test.com/mypath/',
       paramKeys: [
         {
-          regex: '\\d+',
+          keyContents: '\\d+',
           replacement: '[redacted]'
         }
       ],
@@ -411,7 +436,7 @@ scenarios:
       url: 'https://www.test.com/mypath/?Foo=bar+foo&5_From_Page=https://www.site.com/&10_Name=&20_Email=support@test.com&30_Phone=1234567890&40_Message=this%20is%20a%20test%20message,%20please%20ignore',
       paramKeys: [
         {
-          regex: '\\d+_',
+          keyContents: '\\d+_',
           replacement: '[redacted]'
         }
       ],
@@ -423,21 +448,21 @@ scenarios:
 
     // Verify that the variable returns a result.
     assertThat(variableResult).isEqualTo('https://www.test.com/mypath/?Foo=bar%20foo&5_From_Page=[redacted]&10_Name=&20_Email=[redacted]&30_Phone=[redacted]&40_Message=[redacted]');
-- name: Test splitting by |
+- name: Test more than 1
   code: |-
     const mockData = {
       url: 'https://www.test.com/mypath/?foo=bar+foo&10_Name=&20_Email=support@test.com&30_Phone=1234567890&40_Message=this%20is%20a%20test%20message,%20please%20ignore&utm_content=content&utm_source=newsletter&utm_medium=email',
       paramKeys: [
         {
-          regex: 'foo',
+          keyContents: 'foo',
           replacement: '[redacted]'
         },
         {
-          regex: 'utm_',
+          keyContents: 'utm_',
           replacement: '[redacted]'
         },
         {
-          regex: '\\d+',
+          keyContents: '\\d+',
           replacement: '[redacted]'
         },
       ],
@@ -449,16 +474,17 @@ scenarios:
 
     // Verify that the variable returns a result.
     assertThat(variableResult).isEqualTo('https://www.test.com/mypath/?foo=[redacted]&10_Name=&20_Email=[redacted]&30_Phone=[redacted]&40_Message=[redacted]&utm_content=[redacted]&utm_source=[redacted]&utm_medium=[redacted]');
-- name: Test key full match
+- name: Test key - match condition equals
   code: "const mockData = {\n  url: 'https://www.test.com/mypath/?foo=bar+foo&10_Name=test&utm_source=newsletter&utm_medium=email',\n\
-    \  paramKeys: [\n    {\n      regex: 'foo',\n      replacement: '[redacted]',\n\
-    \      fullMatch: true\n    },\n    {\n      regex: 'utm_',\n      replacement:\
-    \ '[redacted]',\n      fullMatch: true      \n    },\n    {\n      regex: 'utm_medium',\n\
-    \      replacement: '[redacted]',\n      fullMatch: true      \n    },    \n \
-    \   {\n      regex: '\\\\d+',\n      replacement: '[redacted]',\n      fullMatch:\
-    \ true      \n    },\n  ], \n  decodeUri: false\n};\n\n// Call runCode to run\
-    \ the template's code.\nlet variableResult = runCode(mockData);\n\n// Verify that\
-    \ the variable returns a result.\nassertThat(variableResult).isEqualTo('https://www.test.com/mypath/?foo=[redacted]&10_Name=test&utm_source=newsletter&utm_medium=[redacted]');"
+    \  paramKeys: [\n    {\n      keyContents: 'foo',\n      replacement: '[redacted]',\n\
+    \      matchCondition: 'equals'\n    },\n    {\n      keyContents: 'utm_',\n \
+    \     replacement: '[redacted]',\n      matchCondition: 'equals'\n    },\n   \
+    \ {\n      keyContents: 'utm_medium',\n      replacement: '[redacted]',\n    \
+    \  matchCondition: 'equals'\n    },    \n    {\n      keyContents: '\\\\d+',\n\
+    \      replacement: '[redacted]',\n      matchCondition: 'equals'\n    },\n  ],\
+    \ \n  decodeUri: false\n};\n\n// Call runCode to run the template's code.\nlet\
+    \ variableResult = runCode(mockData);\n\n// Verify that the variable returns a\
+    \ result.\nassertThat(variableResult).isEqualTo('https://www.test.com/mypath/?foo=[redacted]&10_Name=test&utm_source=newsletter&utm_medium=[redacted]');"
 - name: Test with param values - Delete no extra
   code: |-
     const mockData = {
@@ -468,7 +494,7 @@ scenarios:
         {
           regex: '(%20[0-9]+(%20| )?)?(\\(|%28)?[0-9]{3}(\\)|%29)?(%20| )?[.-]?[0-9]{3}(%20| )?[.-]?[0-9]{4}',
           replacement: '[phone]',
-          redactOrDelete: 'Delete'
+          replacementType: 'Delete'
         }
       ],
       decodeUri: true
@@ -488,7 +514,7 @@ scenarios:
         {
           regex: '(%20[0-9]+(%20| )?)?(\\(|%28)?[0-9]{3}(\\)|%29)?(%20| )?[.-]?[0-9]{3}(%20| )?[.-]?[0-9]{4}',
           replacement: '[phone]',
-          redactOrDelete: 'Delete'
+          replacementType: 'Delete'
         }
       ],
       decodeUri: true
@@ -505,9 +531,9 @@ scenarios:
       url: 'https://www.test.com/subpath?10_Name=my%20name&20_Email=support@test.com&30_Phone=1234567890&40_Message=this%20is%20a%20test%20message,%20please%20ignore',
       paramKeys: [
         {
-          regex: '\\d+_',
+          keyContents: '\\d+_',
           replacement: '[redacted]',
-          redactOrDelete: 'Delete'
+          replacementType: 'Delete'
         }
       ],
       decodeUri: false
@@ -518,15 +544,29 @@ scenarios:
 
     // Verify that the variable returns a result.
     assertThat(variableResult).isEqualTo('https://www.test.com/subpath');
+- name: Test key diff cases
+  code: "const mockData = {\n  url: 'https://www.test.com/?foo=encode&foOO=KEEP&equalsIgnorE=encode&dontIgnoreCasE=KEEP&redactThis=encode&myregENCODEthis=encode',\n\
+    \  paramKeys: [\n    {\n      keyContents: 'foo',\n      replacement: '[redacted]',\n\
+    \      matchCondition: 'equals'\n    },\n    {\n      keyContents: 'fooO',\n \
+    \     replacement: '[redacted]',\n      matchCondition: 'equals'\n    },    \n\
+    \    {\n      keyContents: 'equalsIgnore',\n      replacement: '[redacted]',\n\
+    \      matchCondition: 'equalsIgnore'      \n    },\n    {\n      keyContents:\
+    \ 'dontIgnoreCase',\n      replacement: '[redacted]',\n      matchCondition: 'matchesRegEx'\n\
+    \    },\n    {\n      keyContents: 'redactThis',\n      replacement: '[redacted]',\n\
+    \      matchCondition: 'matchesRegEx'\n    },    \n    {\n      keyContents: 'myregEncode',\n\
+    \      replacement: '[redacted]',\n      matchCondition: 'matchesRegExIgnore'\n\
+    \    },\n  ],\n  decodeUri: false\n};\n\n// Call runCode to run the template's\
+    \ code.\nlet variableResult = runCode(mockData);\n\n// Verify that the variable\
+    \ returns a result.\nassertThat(variableResult).isEqualTo('https://www.test.com/?foo=[redacted]&foOO=KEEP&equalsIgnorE=[redacted]&dontIgnoreCasE=KEEP&redactThis=[redacted]&myregENCODEthis=[redacted]');"
 - name: Test with param keys - Delete extra
   code: |-
     const mockData = {
       url: 'https://www.test.com/subpath?success=1&10_Name=my%20name&20_Email=support@test.com&30_Phone=1234567890&40_Message=this%20is%20a%20test%20message,%20please%20ignore',
       paramKeys: [
         {
-          regex: '\\d+_',
+          keyContents: '\\d+_',
           replacement: '[redacted]',
-          redactOrDelete: 'Delete'
+          replacementType: 'Delete'
         }
       ],
       decodeUri: false

@@ -1,8 +1,10 @@
 name: Release
 on:
-  push:
-    branches:
-      - master
+  workflow_dispatch:
+    inputs:
+      increment:
+        required: false
+        description: 'Version to release (major, minor, patch or specific version)'
 jobs:
   release:
     name: Conventional Release
